@@ -23,12 +23,9 @@ ENV HOME=/headless \
     VNC_COL_DEPTH=24 \
     VNC_RESOLUTION=1440x900 \
     VNC_PW='' \
-    VNC_VIEW_ONLY=false
+    VNC_VIEW_ONLY=false \
+    TZ=Europe/Moscow
 
-ENV TZ=Europe/Moscow
-#    LANGUAGE=ru_RU.UTF-8 \
-#    LANG=ru_RU.UTF-8 \
-#    LC_ALL=ru_RU.UTF-8
 
 WORKDIR $HOME
 
@@ -38,7 +35,6 @@ ADD ./src/debian/install/ $INST_SCRIPTS/
 
 ### Install some common tools
 RUN $INST_SCRIPTS/tools.sh
-#ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ENV LANG='ru_RU.UTF-8' LANGUAGE='ru_RU:ru' LC_ALL='ru_RU.UTF-8'
 
 ### Install custom fonts
@@ -62,132 +58,6 @@ ADD ./src/common/scripts $STARTUPDIR
 RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME
 
 # USER 1000
-
-# INSTALLING 1C PLATFORM
-
-#ARG ONEC_USERNAME
-#ARG ONEC_PASSWORD
-#ARG ONEC_VERSION="8.3.20.2180"
-#ARG NH_SERVER_ADDR
-#ARG NH_PORT_NUMBER
-#ENV INSTALLER_TYPE=all
-#
-#ENV DBGS=false
-#ENV CVRG=false
-#
-#WORKDIR /tmp
-#
-## + Установка шрифтов - альтернативный способ
-##RUN \
-##    apt-get -qqy install -yqq --no-install-recommends \
-##        fontconfig \
-##    && mkdir -p /usr/share/fonts/truetype/msttcorefonts
-##COPY ./onec/configs/msttcorefonts /usr/share/fonts/truetype/msttcorefonts
-##RUN \
-##    fc-cache –fv
-##
-#RUN \
-#  apt-get install -yqq ttf-mscorefonts-installer
-## - Установка шрифтов
-#
-## + Установка OSCRIPT
-#ARG ONESCRIPT_VERSION="1.8.3"
-#ARG ONESCRIPT_PACKAGES="add 1connector cmdline messenger v8metadata-reader v8storage v8unpack vanessa-runner"
-#
-#COPY ./src/onec/scripts/install-onescript.sh /tmp/install-onescript.sh
-#RUN \
-#    chmod +x /tmp/install-onescript.sh \
-#    && /tmp/install-onescript.sh $ONESCRIPT_VERSION $ONESCRIPT_PACKAGES
-#
-#RUN \
-#    wget https://download.mono-project.com/repo/xamarin.gpg | gpg --dearmor | tee /etc/apt/keyrings/xamarin-mono-archive.gpg >/dev/null
-#
-#
-#    apt-get install -yqq \
-#      apt-utils \
-#      gnupg \
-#      dirmngr \
-#      build-essential \
-#      file \
-##    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-##    && echo "deb http://download.mono-project.com/repo/debian stable-buster main" > /etc/apt/sources.list.d/mono-official-stable.list \
-##    && apt-get update -qq \
-##    && apt-get install --no-install-recommends -yqq \
-#      mono-runtime \
-#      ca-certificates-mono \
-#      libmono-i18n4.0-all \
-#      libmono-system-runtime-serialization4.0-cil
-#
-#
-##RUN cd /tmp \
-##    && wget https://github.com/EvilBeaver/OneScript/releases/download/v${ONESCRIPT_VERSION}/onescript-engine_${ONESCRIPT_VERSION}_all.deb \
-##    && dpkg -i /tmp/onescript-engine_${ONESCRIPT_VERSION}_all.deb \
-##    && rm -f /tmp/onescript-engine_${ONESCRIPT_VERSION}_all.deb
-#
-#ADD https://github.com/EvilBeaver/OneScript/releases/download/v${ONESCRIPT_VERSION}/onescript-engine_${ONESCRIPT_VERSION}_all.deb
-#
-#RUN \
-#    apt-get install -qqy \
-#      dirmngr  \
-#      gnupg  \
-#      apt-transport-https  \
-#      ca-certificates \
-#    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-#    && echo "deb https://download.mono-project.com/repo/debian stable-bullseye main" > /etc/apt/sources.list.d/mono-official-stable.list \
-#    && apt-get update -q \
-#    && apt-get install mono-complete -y \
-#    && dpkg -i /tmp/onescript-engine_${ONESCRIPT_VERSION}_all.deb \
-#    && rm -f /tmp/onescript-engine_${ONESCRIPT_VERSION}_all.deb \
-#    && opm update --all \
-#    && opm install ${ONESCRIPT_PACKAGES}
-## - Установка OSCRIPT
-
-
-
-
-
-#COPY ./src/onec/scripts/download-onec-packages.sh /download-onec-packages.sh
-#
-#COPY ./onec/dist/ downloads/platform83/${ONEC_VERSION}/
-#RUN rm downloads/platform83/${ONEC_VERSION}/.gitkeep \
-#  && rm -rf downloads/platform83/${ONEC_VERSION}/thin.client*.tar.gz \
-#  && rm -rf downloads/platform83/${ONEC_VERSION}/1c_edt*.tar.gz \
-#  && if [ -z "$(ls -A downloads/platform83/${ONEC_VERSION})" ] ; then \
-#      chmod +x /download-onec-packages.sh \
-#      && /download-onec-packages.sh $ONEC_USERNAME $ONEC_PASSWORD; \
-#    fi \
-#  && rm -rf downloads/platform83/${ONEC_VERSION}/*thin*.tar.gz \
-#  && for file in downloads/platform83/${ONEC_VERSION}/*.tar.gz; do tar -xzvf "$file"; done \
-#  && rm -rf *thin*.deb \
-#  && rm /download-onec-packages.sh
-#
-## До 8.3.20 требуется установить libwebkitgtk-3.0-0, иначе - библиотеки по списку
-#COPY ./onec/scripts/install-additional-libs-for-1c.sh /install-additional-libs-for-1c.sh
-#RUN chmod +x /install-additional-libs-for-1c.sh \
-#    && /install-additional-libs-for-1c.sh \
-#    && rm /install-additional-libs-for-1c.sh
-#
-## Установка платформы 1С
-#COPY ./onec/scripts/install-onec-packages.sh /install-onec-packages.sh
-#RUN chmod +x /install-onec-packages.sh \
-#  && /install-onec-packages.sh \
-#  && rm /install-onec-packages.sh \
-#  && rm -rf /tmp/*
-#
-#COPY ./onec/scripts/create-symlink-to-current-1cv8.sh /create-symlink-to-current-1cv8.sh
-#RUN chmod +x /create-symlink-to-current-1cv8.sh \
-#  && /create-symlink-to-current-1cv8.sh \
-#  && rm /create-symlink-to-current-1cv8.sh
-#
-#COPY ./onec/configs/client/conf /opt/1cv8/current/conf
-#RUN sed -i "s/NH_SERVER_ADDR =/NH_SERVER_ADDR = $NH_SERVER_ADDR/g" "/opt/1cv8/current/conf/nethasp.ini" \
-#    && sed -i "s/NH_PORT_NUMBER =/NH_PORT_NUMBER = $NH_PORT_NUMBER/g" "/opt/1cv8/current/conf/nethasp.ini"
-#
-#RUN echo 'DisableUnsafeActionProtection=.*' >> /opt/1cv8/conf/conf.cfg
-
-
-
-
 
 
 
