@@ -13,3 +13,63 @@ RUN \
     && /tmp/install-onescript.sh $ONESCRIPT_VERSION $ONESCRIPT_PACKAGES
 # - Установка OSCRIPT
 
+# + Установка шрифтов для 1С
+RUN \
+  echo "deb http://ftp.ru.debian.org/debian bullseye main" >> /etc/apt/sources.list \
+  && echo "deb http://ftp.ru.debian.org/debian bullseye contrib" >> /etc/apt/sources.list \
+  && apt update \
+  && apt install ttf-mscore* -qqy \
+  && fc-cache -fv
+# - Установка шрифтов
+
+# + Установка 1С
+ARG ONEC_USERNAME="user"
+ARG ONEC_PASSWORD="password"
+ARG ONEC_VERSION="8.3.20.2180"
+ARG NH_SERVER_ADDR=10.0.0.69
+ARG NH_PORT_NUMBER=474
+ENV INSTALLER_TYPE=all
+
+ENV DBGS=false
+ENV CVRG=false
+
+WORKDIR /tmp
+
+COPY ./src/onec/scripts/download-onec-packages.sh /tmp/download-onec-packages.sh
+
+COPY ./src/onec/dist/ downloads/platform83/${ONEC_VERSION}/
+RUN rm downloads/platform83/${ONEC_VERSION}/.gitkeep \
+  && rm -rf downloads/platform83/${ONEC_VERSION}/thin.client*.tar.gz \
+  && rm -rf downloads/platform83/${ONEC_VERSION}/1c_edt*.tar.gz \
+  && if [ -z "$(ls -A downloads/platform83/${ONEC_VERSION})" ] ; then \
+      chmod +x /tmp/download-onec-packages.sh \
+      && /tmp/download-onec-packages.sh $ONEC_USERNAME $ONEC_PASSWORD; \
+    fi \
+  && rm -rf downloads/platform83/${ONEC_VERSION}/*thin*.tar.gz \
+  && for file in downloads/platform83/${ONEC_VERSION}/*.tar.gz; do tar -xzvf "$file"; done \
+  && rm -rf *thin*.deb \
+  && rm /tmp/download-onec-packages.sh
+
+# До 8.3.20 требуется установить libwebkitgtk-3.0-0, иначе - библиотеки по списку
+COPY ./src/onec/scripts/install-additional-libs-for-1c.sh /tmp/install-additional-libs-for-1c.sh
+RUN chmod +x /tmp/install-additional-libs-for-1c.sh \
+    && /tmp/install-additional-libs-for-1c.sh \
+    && rm /tmp/install-additional-libs-for-1c.sh
+
+# Установка платформы 1С
+COPY ./src/onec/scripts/install-onec-packages.sh /tmp/install-onec-packages.sh
+RUN chmod +x /tmp/install-onec-packages.sh \
+  && /tmp/install-onec-packages.sh \
+  && rm /tmp/install-onec-packages.sh
+
+COPY ./src/onec/scripts/create-symlink-to-current-1cv8.sh /tmp/create-symlink-to-current-1cv8.sh
+RUN chmod +x /tmp/create-symlink-to-current-1cv8.sh \
+  && /tmp/create-symlink-to-current-1cv8.sh \
+  && rm /tmp/create-symlink-to-current-1cv8.sh
+
+COPY ./src/onec/configs/client/conf /opt/1cv8/current/conf
+RUN sed -i "s/NH_SERVER_ADDR =/NH_SERVER_ADDR = $NH_SERVER_ADDR/g" "/opt/1cv8/current/conf/nethasp.ini" \
+    && sed -i "s/NH_PORT_NUMBER =/NH_PORT_NUMBER = $NH_PORT_NUMBER/g" "/opt/1cv8/current/conf/nethasp.ini"
+
+RUN echo 'DisableUnsafeActionProtection=.*' >> /opt/1cv8/conf/conf.cfg
+# - Установка 1С

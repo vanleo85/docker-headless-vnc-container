@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+
 ONEC_RELEASE=`echo $ONEC_VERSION | cut -d . -f 3`
 echo "Release: "$ONEC_RELEASE
 
@@ -7,7 +8,7 @@ echo "Release: "$ONEC_RELEASE
 # Разработка и администрирование - 1С:Предприятие <версия> документация 
 # Руководство администратора - Требования к аппаратуре и программному обеспечению - Прочие требования - Для ОС Linux https://its.1c.ru/db/v8318doc#bookmark:adm:TI000000022
 # Руководство пользователя - Глава 2. Установка и обновление системы -  Особенности установки системы в ОС Linux https://its.1c.ru/db/v8318doc#bookmark:usr:TI000000019
-apt-get update && apt-get install -qqy --no-install-recommends \
+apt update && apt install -qqy --no-install-recommends \
     libmagickwand-6.q16-6 \
     libfontconfig1 \
     libfreetype6 \
@@ -19,13 +20,13 @@ apt-get update && apt-get install -qqy --no-install-recommends \
     libgssapi-krb5-2
 
 cp /etc/apt/sources.list /etc/apt/sources.list.default
-echo 'deb http://ru.archive.ubuntu.com/ubuntu/ bionic main universe' >> /etc/apt/sources.list
-apt-get update
+echo "deb http://mirror.yandex.ru/debian buster main" >> /etc/apt/sources.list
+apt update
 
 if [[ "$ONEC_RELEASE" -lt "20" ]]; then
-    apt-get install -qqy --no-install-recommends libwebkitgtk-3.0-0
+    apt install -qqy --no-install-recommends libwebkitgtk-3.0-0
 else
-    apt-get install -qqy --no-install-recommends \
+    apt install -qqy --no-install-recommends \
         libgtk-3-0 \
         libenchant1c2a \
         libharfbuzz-icu0 \

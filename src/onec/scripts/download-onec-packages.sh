@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ONEC_USERNAME=$1
 ONEC_PASSWORD=$2

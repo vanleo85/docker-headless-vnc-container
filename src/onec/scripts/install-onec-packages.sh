@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ONEC_RELEASE=`echo "$ONEC_VERSION" | cut -d . -f 3`
 echo "Release: ""$ONEC_RELEASE"
