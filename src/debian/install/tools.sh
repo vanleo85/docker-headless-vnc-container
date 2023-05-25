@@ -9,6 +9,11 @@ apt-get install -y vim wget net-tools locales bzip2 procps \
 apt-get clean -y
 
 echo "generate locales für en_US.UTF-8"
-locale-gen en_US.UTF-8
-locale-gen ru_RU.UTF-8
-dpkg-reconfigure locales
+#locale-gen en_US.UTF-8
+#locale-gen ru_RU.UTF-8
+#dpkg-reconfigure locales
+sed -i -e \
+  's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen \
+   && locale-gen
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
