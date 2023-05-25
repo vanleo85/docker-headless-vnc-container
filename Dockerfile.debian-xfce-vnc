@@ -25,10 +25,10 @@ ENV HOME=/headless \
     VNC_PW='' \
     VNC_VIEW_ONLY=false
 
-ENV TZ=Europe/Moscow \
-    LANGUAGE=ru_RU.UTF-8 \
-    LANG=ru_RU.UTF-8 \
-    LC_ALL=ru_RU.UTF-8
+ENV TZ=Europe/Moscow
+#    LANGUAGE=ru_RU.UTF-8 \
+#    LANG=ru_RU.UTF-8 \
+#    LC_ALL=ru_RU.UTF-8
 
 WORKDIR $HOME
 
@@ -38,8 +38,8 @@ ADD ./src/debian/install/ $INST_SCRIPTS/
 
 ### Install some common tools
 RUN $INST_SCRIPTS/tools.sh
-#ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
-ENV LANG='ru_RU.UTF-8' LANGUAGE='ru_RU:ru' LC_ALL='ru_RU.UTF-8'
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+#ENV LANG='ru_RU.UTF-8' LANGUAGE='ru_RU:ru' LC_ALL='ru_RU.UTF-8'
 
 ### Install custom fonts
 RUN $INST_SCRIPTS/install_custom_fonts.sh
