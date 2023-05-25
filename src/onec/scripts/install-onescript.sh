@@ -14,7 +14,13 @@ echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] http
 apt update
 
 apt install -qqy \
-    mono-complete
+    mono-runtime \
+    ca-certificates-mono \
+    libmono-i18n4.0-all \
+    libmono-i18n-cjk4.0-cil \
+    libmono-i18n-mideast4.0-cil \
+    libmono-i18n-other4.0-cil \
+    libmono-i18n-rare4.0-cil
 
 cd /tmp \
     && wget -O /tmp/onescript-engine-all.deb https://github.com/EvilBeaver/OneScript/releases/download/v${ONESCRIPT_VERSION}/onescript-engine_${ONESCRIPT_VERSION}_all.deb \
