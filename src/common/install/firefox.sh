@@ -39,4 +39,3 @@ function instFF() {
 }
 
 instFF "$VERSION" '/usr/lib/firefox'
-
