@@ -25,6 +25,11 @@ ENV HOME=/headless \
     VNC_PW='' \
     VNC_VIEW_ONLY=false
 
+ENV TZ=Europe/Moscow \
+    LANGUAGE=ru_RU.UTF-8 \
+    LANG=ru_RU.UTF-8 \
+    LC_ALL=ru_RU.UTF-8
+
 WORKDIR $HOME
 
 ### Add all install scripts for further steps
