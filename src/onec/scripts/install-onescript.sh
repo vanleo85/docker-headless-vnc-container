@@ -23,8 +23,8 @@ apt install -qqy \
     libmono-i18n-rare4.0-cil
 
 cd /tmp \
-    && wget -O /tmp/onescript-engine-all.deb https://github.com/EvilBeaver/OneScript/releases/download/v${ONESCRIPT_VERSION}/onescript-engine_${ONESCRIPT_VERSION}_all.deb \
+    && wget -O /tmp/onescript-engine-all.deb https://github.com/EvilBeaver/OneScript/releases/download/v"$ONESCRIPT_VERSION"/onescript-engine_"$ONESCRIPT_VERSION"_all.deb \
     && dpkg -i /tmp/onescript-engine-all.deb \
     && rm -f /tmp/onescript-engine-all.deb \
     && opm update --all \
-    && opm install ${ONESCRIPT_PACKAGES}
+    && opm install "$ONESCRIPT_PACKAGES"
