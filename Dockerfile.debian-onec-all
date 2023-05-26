@@ -87,3 +87,5 @@ RUN wget -q -O Coverage41C.tar https://github.com/1c-syntax/Coverage41C/releases
     && rm -rf /tmp/Coverage41C* \
     && ln -s /Coverage41C/bin/Coverage41C /usr/bin/Coverage41C
 # - COVERAGE
+
+WORKDIR /
