@@ -22,10 +22,10 @@ ENV HOME=/headless \
     DEBIAN_FRONTEND=noninteractive \
     VNC_COL_DEPTH=24 \
     VNC_RESOLUTION=1440x900 \
-    VNC_PW='vncpassword' \
+    VNC_PW='' \
     VNC_VIEW_ONLY=false \
     TZ=Europe/Moscow \
-    VNC_PASSWORDLESS=true
+    VNC_PASSWORDLESS=false
 
 WORKDIR $HOME
 
