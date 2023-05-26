@@ -30,7 +30,7 @@ ARG ONEC_VERSION="8.3.20.2180"
 ARG NH_SERVER_ADDR=10.0.0.69
 ARG NH_PORT_NUMBER=474
 ENV INSTALLER_TYPE=all
-
+ENV ONEC_VERSION=$ONEC_VERSION
 ENV DBGS=false
 ENV CVRG=false
 
@@ -73,3 +73,17 @@ RUN sed -i "s/NH_SERVER_ADDR =/NH_SERVER_ADDR = $NH_SERVER_ADDR/g" "/opt/1cv8/cu
 
 RUN echo 'DisableUnsafeActionProtection=.*' >> /opt/1cv8/conf/conf.cfg
 # - Установка 1С
+
+# + COVERAGE
+ARG COVERAGE_VERSION=2.7.2
+ARG EDT_VERSION=2022.2.5
+ENV EDT_LOCATION="/EDTCoverageLibs"
+
+COPY ./src/onec/configs/EDTCoverageLibs/${EDT_VERSION}/* /${EDT_LOCATION}/
+RUN wget -q -O Coverage41C.tar https://github.com/1c-syntax/Coverage41C/releases/download/v${COVERAGE_VERSION}/Coverage41C-${COVERAGE_VERSION}.tar \
+    && tar -xf /tmp/Coverage41C.tar \
+    && mkdir /Coverage41C \
+    && cp -r /tmp/Coverage41C*/* /Coverage41C/ \
+    && rm -rf /tmp/Coverage41C* \
+    && ln -s /Coverage41C/bin/Coverage41C /usr/bin/Coverage41C
+# - COVERAGE
