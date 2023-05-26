@@ -25,7 +25,7 @@ ENV HOME=/headless \
     VNC_PW='vncpassword' \
     VNC_VIEW_ONLY=false \
     TZ=Europe/Moscow
-#    VNC_PASSWORDLESS=true
+    VNC_PASSWORDLESS=true
 
 WORKDIR $HOME
 
