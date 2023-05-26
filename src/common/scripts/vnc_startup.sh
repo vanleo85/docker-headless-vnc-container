@@ -51,7 +51,7 @@ fi
 
 ## correct forwarding of shutdown signal
 cleanup () {
-    kill -s SIGTERM $!
+    kill -s SIGTERM !$
     exit 0
 }
 trap cleanup SIGINT SIGTERM
@@ -86,7 +86,8 @@ chmod 600 $PASSWD_PATH
 ## start vncserver and noVNC webclient
 echo -e "\n------------------ start noVNC  ----------------------------"
 if [[ $DEBUG == true ]]; then echo "$NO_VNC_HOME/utils/novnc_proxy --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT"; fi
-$NO_VNC_HOME/utils/novnc_proxy --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT > $STARTUPDIR/no_vnc_startup.log 2>&1 &
+#$NO_VNC_HOME/utils/novnc_proxy --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT > $STARTUPDIR/no_vnc_startup.log 2>&1 &
+$NO_VNC_HOME/utils/novnc_proxy --vnc localhost:$VNC_PORT --listen $NO_VNC_PORT < /dev/null &> /dev/null &
 PID_SUB=$!
 
 #echo -e "\n------------------ start VNC server ------------------------"
@@ -100,7 +101,6 @@ echo -e "start vncserver with param: VNC_COL_DEPTH=$VNC_COL_DEPTH, VNC_RESOLUTIO
 vnc_cmd="vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION PasswordFile=$HOME/.vnc/passwd"
 if [[ ${VNC_PASSWORDLESS:-} == "true" ]]; then
   vnc_cmd="${vnc_cmd} -SecurityTypes None"
-#  vnc_cmd="${vnc_cmd} -SecurityTypes none"
 fi
 
 if [[ $DEBUG == true ]]; then echo "$vnc_cmd"; fi
@@ -108,7 +108,8 @@ if [[ $DEBUG == true ]]; then echo "$vnc_cmd"; fi
 $vnc_cmd < /dev/null &> /dev/null
 
 echo -e "start window manager\n..."
-$HOME/wm_startup.sh &> $STARTUPDIR/wm_startup.log
+#$HOME/wm_startup.sh &> $STARTUPDIR/wm_startup.log
+$HOME/wm_startup.sh < /dev/null &> /dev/null
 
 ## log connect options
 echo -e "\n\n------------------ VNC environment started ------------------"
