@@ -42,6 +42,7 @@ else
         libxfixes3 \
         libxslt1.1 \
         geoclue-2.0
+
 fi
 
 cp /etc/apt/sources.list.default /etc/apt/sources.list

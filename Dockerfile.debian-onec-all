@@ -16,12 +16,11 @@ RUN \
 # - Установка OSCRIPT
 
 # + Установка шрифтов для 1С
+COPY ./src/onec/scripts/install-fonts.sh /tmp/install-fonts.sh
 RUN \
-  echo "deb http://ftp.ru.debian.org/debian bullseye main" >> /etc/apt/sources.list \
-  && echo "deb http://ftp.ru.debian.org/debian bullseye contrib" >> /etc/apt/sources.list \
-  && apt update \
-  && apt install ttf-mscore* -qqy \
-  && fc-cache -fv
+    chmod +x /tmp/install-fonts.sh \
+    && /tmp/install-fonts.sh \
+    && rm -f /tmp/install-fonts.sh \
 # - Установка шрифтов
 
 # + Установка 1С

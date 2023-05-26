@@ -26,7 +26,6 @@ ENV HOME=/headless \
     VNC_VIEW_ONLY=false \
     TZ=Europe/Moscow
 
-
 WORKDIR $HOME
 
 ### Add all install scripts for further steps
@@ -56,11 +55,6 @@ ADD ./src/common/xfce/ $HOME/
 RUN $INST_SCRIPTS/libnss_wrapper.sh
 ADD ./src/common/scripts $STARTUPDIR
 RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME
-
-# USER 1000
-
-
-
 
 ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
 CMD ["--wait"]
