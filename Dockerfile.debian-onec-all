@@ -20,7 +20,7 @@ COPY ./src/onec/scripts/install-fonts.sh /tmp/install-fonts.sh
 RUN \
     chmod +x /tmp/install-fonts.sh \
     && /tmp/install-fonts.sh \
-    && rm -f /tmp/install-fonts.sh \
+    && rm -f /tmp/install-fonts.sh
 # - Установка шрифтов
 
 # + Установка 1С
