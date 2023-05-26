@@ -103,5 +103,5 @@ RUN \
 
 WORKDIR /
 
-ENTRYPOINT [""]
+#ENTRYPOINT [""]
 CMD ["/dockerstartup/vnc_startup.sh", "--wait"]
