@@ -97,12 +97,10 @@ vncserver -kill $DISPLAY &> $STARTUPDIR/vnc_startup.log \
 
 echo -e "start vncserver with param: VNC_COL_DEPTH=$VNC_COL_DEPTH, VNC_RESOLUTION=$VNC_RESOLUTION\n..."
 
-#vnc_cmd="vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION PasswordFile=$HOME/.vnc/passwd"
-vnc_cmd="vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION"
+vnc_cmd="vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION PasswordFile=$HOME/.vnc/passwd"
 if [[ ${VNC_PASSWORDLESS:-} == "true" ]]; then
-  vnc_cmd="${vnc_cmd} -SecurityTypes None"
-else
-  vnc_cmd="${vnc_cmd} PasswordFile=$HOME/.vnc/passwd"
+#  vnc_cmd="${vnc_cmd} -SecurityTypes None"
+  vnc_cmd="${vnc_cmd} -SecurityTypes none"
 fi
 
 if [[ $DEBUG == true ]]; then echo "$vnc_cmd"; fi
