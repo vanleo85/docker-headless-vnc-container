@@ -22,6 +22,8 @@ apt install -qqy \
     libmono-i18n-other4.0-cil \
     libmono-i18n-rare4.0-cil
 
+rm -f /etc/apt/sources.list.d/mono-official-stable.list
+
 wget -O /tmp/onescript-engine-all.deb https://github.com/EvilBeaver/OneScript/releases/download/v"$ONESCRIPT_VERSION"/onescript-engine_"$ONESCRIPT_VERSION"_all.deb
 dpkg -i /tmp/onescript-engine-all.deb
 rm -f /tmp/onescript-engine-all.deb
