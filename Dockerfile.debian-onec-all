@@ -91,6 +91,13 @@ RUN wget -q -O Coverage41C.tar https://github.com/1c-syntax/Coverage41C/releases
     && ln -s /Coverage41C/bin/Coverage41C /usr/bin/Coverage41C
 # - COVERAGE
 
+# + FFMPEG
+RUN \
+  apt update \
+  && apt install -qqy \
+    ffmpeg
+# - FFMPEG
+
 RUN \
   apt -qq autoremove \
   && apt -qq autoclean \
