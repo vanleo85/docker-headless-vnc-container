@@ -24,6 +24,7 @@ ENV HOME=/headless \
     VNC_RESOLUTION=1440x900 \
     VNC_PW='' \
     VNC_VIEW_ONLY=false \
+    VNC_VIEW_ONLY_PRIMARY_PWD='' \   
     TZ=Europe/Moscow \
     VNC_PASSWORDLESS=false
 
