@@ -74,6 +74,15 @@ if [[ -f $PASSWD_PATH ]]; then
     rm -f $PASSWD_PATH
 fi
 
+if [[ -n "$CI_VNC_VIEW_ONLY" ]]; then
+    VNC_VIEW_ONLY=$CI_VNC_VIEW_ONLY
+    VNC_VIEW_ONLY_PRIMARY_PWD=$CI_VNC_VIEW_ONLY_PRIMARY_PWD 
+fi
+
+if [[ -n "$CI_VNC_PW" ]]; then
+    VNC_PW=$CI_VNC_PW
+fi
+
 if [[ $VNC_VIEW_ONLY == "true" ]]; then
     echo "start VNC server in VIEW ONLY mode!"
     #create random pw to prevent access
