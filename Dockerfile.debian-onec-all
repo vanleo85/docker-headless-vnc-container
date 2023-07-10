@@ -49,7 +49,8 @@ RUN rm downloads/platform83/${ONEC_VERSION}/.gitkeep \
   && rm -rf downloads/platform83/${ONEC_VERSION}/*thin*.tar.gz \
   && for file in downloads/platform83/${ONEC_VERSION}/*.tar.gz; do tar -xzvf "$file"; done \
   && rm -rf *thin*.deb \
-  && rm /tmp/download-onec-packages.sh
+  && rm /tmp/download-onec-packages.sh \
+  && rm -rf downloads/platform83/ 
 
 # До 8.3.20 требуется установить libwebkitgtk-3.0-0, иначе - библиотеки по списку
 COPY ./src/onec/scripts/install-additional-libs-for-1c.sh /tmp/install-additional-libs-for-1c.sh
