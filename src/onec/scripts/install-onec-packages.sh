@@ -20,13 +20,13 @@ else
       server)
             set -x
 	    echo $nls_install
-	    ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,$nls_install
+	    ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,ws,$nls_install
           ;;
       client)
-	    ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components client_full,server_admin,$nls_install
+	    ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components client_full,ws,server_admin,$nls_install
           ;;
       all)
-        ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,client_full,server_admin,$nls_install
+        ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,ws,client_full,server_admin,$nls_install
         ;;
     esac
 fi
