@@ -48,7 +48,7 @@ elif [ "$ONEC_VERSION" = "8.3.20.2180" ]; then
 elif [ "$ONEC_VERSION" = "8.3.20.2257" ]; then
     echo "Downloading over yandex cloud"
     mkdir -p /tmp/downloads/platform83/8.3.20.2257
-    wget --no-check-certificate -q -x -O /tmp/downloads/platform83/8.3.20.2257/server64_8_3_20_2257.tar.gz https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/b7LbBcF_ngRlNA
+    wget --no-check-certificate -q -x -O /tmp/downloads/platform83/8.3.20.2257/server64_8_3_20_2257.tar.gz https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/GWpdPWsXl7qINg
     exit 0
 fi
 
