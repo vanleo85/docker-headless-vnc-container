@@ -45,6 +45,11 @@ elif [ "$ONEC_VERSION" = "8.3.20.2180" ]; then
     mkdir -p /tmp/downloads/platform83/8.3.20.2180
     wget --no-check-certificate -q -x -O /tmp/downloads/platform83/8.3.20.2180/server64_8_3_20_2180.tar.gz https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/2otIvnPsjXD-qQ
     exit 0
+elif [ "$ONEC_VERSION" = "8.3.20.2257" ]; then
+    echo "Downloading over yandex cloud"
+    mkdir -p /tmp/downloads/platform83/8.3.20.2257
+    wget --no-check-certificate -q -x -O /tmp/downloads/platform83/8.3.20.2257/server64_8_3_20_2257.tar.gz https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/b7LbBcF_ngRlNA
+    exit 0
 fi
 
 echo "Downloading Oneget tool from https://github.com/v8platform/oneget"
