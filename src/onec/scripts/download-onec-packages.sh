@@ -25,7 +25,12 @@ fi
 ONEC_RELEASE=`echo $ONEC_VERSION | cut -d . -f 3`
 echo "Release: "$ONEC_RELEASE
 
-if [ "$ONEC_VERSION" = "8.3.22.1923" ]; then
+if [ "$ONEC_VERSION" = "8.3.20.2290" ]; then
+    echo "Downloading over yandex cloud"
+    mkdir -p /tmp/downloads/platform83/8.3.20.2290
+    wget --no-check-certificate -q -x -O /tmp/downloads/platform83/8.3.20.2290/server64_8_3_20_2290.tar.gz https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/RkrfuDNnhV1MjQ
+    exit 0
+elif [ "$ONEC_VERSION" = "8.3.22.1923" ]; then
     echo "Downloading over yandex cloud"
     mkdir -p /tmp/downloads/platform83/8.3.22.1923
     wget --no-check-certificate -q -x -O /tmp/downloads/platform83/8.3.22.1923/server64_8_3_22_1923.tar.gz https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/lwQyAuEH2G7Rdg
