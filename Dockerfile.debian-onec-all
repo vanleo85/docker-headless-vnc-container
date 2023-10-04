@@ -5,7 +5,7 @@ USER root
 
 # + Установка OSCRIPT
 ARG ONESCRIPT_VERSION="1.8.3"
-ARG ONESCRIPT_PACKAGES="add 1connector cmdline messenger v8metadata-reader v8storage v8unpack vanessa-runner"
+ARG ONESCRIPT_PACKAGES="add 1connector cmdline messenger v8metadata-reader v8storage v8unpack vanessa-runner stebi"
 
 COPY ./src/onec/scripts/install-onescript.sh /tmp/install-onescript.sh
 RUN \

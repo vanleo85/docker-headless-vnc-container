@@ -5,6 +5,7 @@ ONESCRIPT_VERSION=$1
 ONESCRIPT_PACKAGES=$2
 
 apt-get install -qqy \
+    nupkg-newtonsoft.json.6.0.8 \
     dirmngr  \
     ca-certificates \
     gnupg
