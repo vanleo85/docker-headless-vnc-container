@@ -100,6 +100,15 @@ RUN \
     ffmpeg
 # - FFMPEG
 
+# + Microsoft ODBC 17
+ENV ACCEPT_EULA=Y 
+RUN \
+  wget -O - https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc \
+  && wget -O - https://packages.microsoft.com/config/debian/11/prod.list | tee /etc/apt/sources.list.d/mssql-release.list \
+  && apt-get update \
+  && apt-get install -qqy msodbcsql17
+# - Microsoft ODBC 17
+
 RUN \
   apt -qq autoremove \
   && apt -qq autoclean \
