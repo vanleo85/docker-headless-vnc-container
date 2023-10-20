@@ -100,6 +100,13 @@ RUN \
     ffmpeg
 # - FFMPEG
 
+# + jq
+RUN \
+  apt update \
+  && apt install -qqy \
+    jq
+# - jq
+
 # + Microsoft ODBC 17
 ENV ACCEPT_EULA=Y 
 RUN \
