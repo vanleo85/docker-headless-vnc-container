@@ -82,7 +82,9 @@ ARG EDT_VERSION=2022.2.5
 ENV EDT_LOCATION="/EDTCoverageLibs"
 
 RUN \
-   apt update && apt install openjdk-11-jre -qqy
+   apt update && apt install -qqy \
+    openjdk-11-jre \
+    xsltproc
 
 COPY ./src/onec/configs/EDTCoverageLibs/${EDT_VERSION}/* /${EDT_LOCATION}/
 RUN wget -q -O Coverage41C.tar https://github.com/1c-syntax/Coverage41C/releases/download/v${COVERAGE_VERSION}/Coverage41C-${COVERAGE_VERSION}.tar \
