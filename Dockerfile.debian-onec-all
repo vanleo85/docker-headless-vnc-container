@@ -80,6 +80,7 @@ RUN echo 'DisableUnsafeActionProtection=.*' >> /opt/1cv8/conf/conf.cfg
 ARG COVERAGE_VERSION=2.7.2
 ARG EDT_VERSION=2022.2.5
 ENV EDT_LOCATION="/EDTCoverageLibs"
+ENV EDT_CLASSPATH="/EDTCoverageLibs"
 
 RUN \
    apt update && apt install -qqy \
@@ -87,12 +88,9 @@ RUN \
     xsltproc
 
 COPY ./src/onec/configs/EDTCoverageLibs/${EDT_VERSION}/* /${EDT_LOCATION}/
-RUN wget -q -O Coverage41C.tar https://github.com/1c-syntax/Coverage41C/releases/download/v${COVERAGE_VERSION}/Coverage41C-${COVERAGE_VERSION}.tar \
-    && tar -xf /tmp/Coverage41C.tar \
-    && mkdir /Coverage41C \
-    && cp -r /tmp/Coverage41C*/* /Coverage41C/ \
-    && rm -rf /tmp/Coverage41C* \
-    && ln -s /Coverage41C/bin/Coverage41C /usr/bin/Coverage41C
+COPY ./src/onec/coverage/*.tar /tmp
+COPY ./src/onec/scripts/install-coverage.sh /tmp/install-coverage.sh
+RUN chmod +x /tmp/install-coverage.sh && /tmp/install-onec-packages.sh && rm /tmp/install-onec-packages.sh
 # - COVERAGE
 
 # + FFMPEG
