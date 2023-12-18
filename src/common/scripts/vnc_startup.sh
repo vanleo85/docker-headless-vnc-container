@@ -133,6 +133,13 @@ if [[ $DEBUG == true ]] || [[ $1 =~ -t|--tail-log ]]; then
     tail -f $STARTUPDIR/*.log $HOME/.vnc/*$DISPLAY.log
 fi
 
+if [[ "${NH_SERVER_ADDR}" ]]; then
+    sed -i "s/NH_SERVER_ADDR =*/NH_SERVER_ADDR = ${NH_SERVER_ADDR}/g" "/opt/1cv8/conf/nethasp.ini"     
+fi
+if [[ "${NH_PORT_NUMBER}" ]]; then
+    sed -i "s/NH_PORT_NUMBER =*/NH_PORT_NUMBER = ${NH_PORT_NUMBER}/g" "/opt/1cv8/conf/nethasp.ini"     
+fi
+
 if [ -z "$1" ] || [[ $1 =~ -w|--wait ]]; then
     wait $PID_SUB
 else

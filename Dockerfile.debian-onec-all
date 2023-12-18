@@ -69,11 +69,12 @@ RUN chmod +x /tmp/create-symlink-to-current-1cv8.sh \
   && /tmp/create-symlink-to-current-1cv8.sh \
   && rm /tmp/create-symlink-to-current-1cv8.sh
 
-COPY ./src/onec/configs/client/conf /opt/1cv8/current/conf
-RUN sed -i "s/NH_SERVER_ADDR =/NH_SERVER_ADDR = $NH_SERVER_ADDR/g" "/opt/1cv8/current/conf/nethasp.ini" \
-    && sed -i "s/NH_PORT_NUMBER =/NH_PORT_NUMBER = $NH_PORT_NUMBER/g" "/opt/1cv8/current/conf/nethasp.ini"
+COPY ./src/onec/configs/client/conf/conf.cfg /opt/1cv8/current/conf/
+COPY ./src/onec/configs/client/conf/conf.cfg ./src/onec/configs/client/conf/nethasp.ini /opt/1cv8/conf/
 
-RUN echo 'DisableUnsafeActionProtection=.*' >> /opt/1cv8/conf/conf.cfg
+RUN echo "ConfLocation=/opt/1cv8/conf" >> /opt/1cv8/current/conf/conf.cfg \
+    && sed -i "s/NH_SERVER_ADDR =/NH_SERVER_ADDR = $NH_SERVER_ADDR/g" "/opt/1cv8/conf/nethasp.ini" \
+    && sed -i "s/NH_PORT_NUMBER =/NH_PORT_NUMBER = $NH_PORT_NUMBER/g" "/opt/1cv8/conf/nethasp.ini"  
 # - Установка 1С
 
 # + COVERAGE
