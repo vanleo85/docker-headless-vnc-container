@@ -135,11 +135,11 @@ fi
 
 if [[ -n "${NH_SERVER_ADDR}" ]]; then
     sed -i "s/NH_SERVER_ADDR = .*/NH_SERVER_ADDR = ${NH_SERVER_ADDR}/g" "/opt/1cv8/conf/nethasp.ini"  
-    echo "NH_SERVER_ADDR was sustituted by new value: ${NH_SERVER_ADDR}"   
+    echo "NH_SERVER_ADDR was substituted by new value: ${NH_SERVER_ADDR}"
 fi
 if [[ -n "${NH_PORT_NUMBER}" ]]; then
     sed -i "s/NH_PORT_NUMBER = .*/NH_PORT_NUMBER = ${NH_PORT_NUMBER}/g" "/opt/1cv8/conf/nethasp.ini"     
-    echo "NH_PORT_NUMBER was sustituted by new value: ${NH_PORT_NUMBER}"
+    echo "NH_PORT_NUMBER was substituted by new value: ${NH_PORT_NUMBER}"
 fi
 
 if [ -z "$1" ] || [[ $1 =~ -w|--wait ]]; then
