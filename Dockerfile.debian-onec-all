@@ -87,12 +87,10 @@ RUN \
 #ARG EDT_VERSION=2022.2.5
 #ENV EDT_LOCATION="/EDTCoverageLibs"
 #ENV EDT_CLASSPATH="/EDTCoverageLibs"
-#
 #RUN \
 #   apt update && apt install -qqy \
 #    openjdk-11-jre \
 #    xsltproc
-#
 #COPY ./src/onec/configs/EDTCoverageLibs/${EDT_VERSION}/ /${EDT_LOCATION}/
 #COPY ./src/onec/coverage/ /tmp
 #COPY ./src/onec/scripts/install-coverage.sh /tmp/install-coverage.sh
