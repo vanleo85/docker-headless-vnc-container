@@ -27,8 +27,8 @@ RUN \
 ARG ONEC_USERNAME="user"
 ARG ONEC_PASSWORD="password"
 ARG ONEC_VERSION="8.3.20.2180"
-ARG NH_SERVER_ADDR=10.0.0.69
-ARG NH_PORT_NUMBER=474
+ARG NH_SERVER_ADDR=10.0.1.62
+ARG NH_PORT_NUMBER=30475
 ENV INSTALLER_TYPE=all
 ENV ONEC_VERSION=$ONEC_VERSION
 ENV DBGS=false
@@ -104,11 +104,12 @@ RUN \
     ffmpeg
 # - FFMPEG
 
-# + jq
+# + jq + xdotool (for hotkeys)
 RUN \
   apt update \
   && apt install -qqy \
-    jq
+    jq \
+    xdotool
 # - jq
 
 # + Microsoft ODBC 17
