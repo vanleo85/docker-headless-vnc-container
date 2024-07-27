@@ -23,6 +23,11 @@ cp /etc/apt/sources.list /etc/apt/sources.list.default
 echo "deb http://mirror.yandex.ru/debian buster main" >> /etc/apt/sources.list
 apt update
 
+if [[ "$ONEC_RELEASE" -ge "24" ]]; then
+    # Иначе не работает на платформе 8.3.24
+    apt install -qqy --no-install-recommends libwebkit2gtk-4.0-dev
+fi
+
 if [[ "$ONEC_RELEASE" -lt "20" ]]; then
     apt install -qqy --no-install-recommends libwebkitgtk-3.0-0
 else
