@@ -16,17 +16,18 @@ if [[ "$ONEC_RELEASE" -lt "20" ]]; then
     esac
 else
     nls_install="ru"
+    chmod +x "./setup-full-$ONEC_VERSION"*
     case "$INSTALLER_TYPE" in
       server)
             set -x
-	    echo $nls_install
-	    ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,ws,$nls_install
+	          echo $nls_install
+	          ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,ws,$nls_install
           ;;
       client)
-	    ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components client_full,ws,server_admin,$nls_install
+	          ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components client_full,ws,server_admin,$nls_install
           ;;
       all)
-        ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,ws,client_full,server_admin,$nls_install
+            ./setup-full-"$ONEC_VERSION"-x86_64.run --mode unattended --enable-components server,ws,client_full,server_admin,$nls_install
         ;;
     esac
 fi
