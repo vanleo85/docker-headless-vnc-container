@@ -10,4 +10,5 @@ last_row=$(tail -n 1 /usr/bin/google-chrome)
 head -n -1 /usr/bin/google-chrome > google-chrome-temp
 mv google-chrome-temp /usr/bin/google-chrome
 echo "$last_row --no-sandbox" >> /usr/bin/google-chrome
+chmod 777 /usr/bin/google-chrome
 rm google-chrome-stable_current_amd64.deb
