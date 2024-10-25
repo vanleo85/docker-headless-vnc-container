@@ -22,14 +22,14 @@ EOF_FF
 
     ff_distr="$1/distribution"
     mkdir -p "$ff_distr"
-    echo <<EOF_FF
+    cat << EOF > "${ff_distr}/policies.json"
 {
     "policies": {
         "DisableAppUpdate": true
     }
 }
-EOF_FF
-    > $ff_distr/policies.json
+EOF
+
 }
 
 function instFF() {
