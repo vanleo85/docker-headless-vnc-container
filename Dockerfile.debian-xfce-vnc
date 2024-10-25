@@ -60,7 +60,7 @@ RUN $INST_SCRIPTS/libnss_wrapper.sh
 ADD ./src/common/scripts $STARTUPDIR
 RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME
 
-RUN $INST_SCRIPTS/set_firefox_as_default_browser.sh
+#RUN $INST_SCRIPTS/set_firefox_as_default_browser.sh
 
 ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
 CMD ["--wait"]

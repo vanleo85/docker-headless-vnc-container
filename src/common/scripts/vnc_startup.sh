@@ -60,6 +60,8 @@ trap cleanup SIGINT SIGTERM
 $STARTUPDIR/chrome-init.sh
 source $HOME/.chromium-browser.init
 
+$INST_SCRIPTS/set_firefox_as_default_browser.sh
+
 ## resolve_vnc_connection
 VNC_IP=$(hostname -i)
 
