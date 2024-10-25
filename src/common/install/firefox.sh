@@ -25,7 +25,8 @@ EOF_FF
     cat << EOF > "${ff_distr}/policies.json"
 {
     "policies": {
-        "DisableAppUpdate": true
+        "DisableAppUpdate": true,
+        "DontCheckDefaultBrowser": true
     }
 }
 EOF
