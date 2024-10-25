@@ -5,7 +5,7 @@ USER root
 
 # + Установка OSCRIPT
 ARG ONESCRIPT_VERSION="1.9.0"
-ARG ONESCRIPT_PACKAGES="add 1connector cmdline messenger v8metadata-reader v8storage v8unpack vanessa-runner stebi"
+ARG ONESCRIPT_PACKAGES="add 1connector cmdline messenger v8metadata-reader v8storage v8unpack vanessa-runner stebi swagger"
 
 COPY ./src/onec/scripts/install-onescript.sh /tmp/install-onescript.sh
 RUN \
@@ -127,6 +127,14 @@ RUN \
   && apt-get update \
   && apt-get install -qqy msodbcsql17
 # - Microsoft ODBC 17
+
+# + Java
+ENV ACCEPT_EULA=Y
+RUN \
+  apt update \
+  && apt install -qqy apt-utils \
+    openjdk-17-jdk-headless
+# - Java
 
 RUN \
   apt -qq autoremove \

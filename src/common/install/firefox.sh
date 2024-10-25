@@ -15,8 +15,21 @@ user_pref("app.update.lastUpdateTime.background-update-timer", 1182011519);
 user_pref("app.update.lastUpdateTime.blocklist-background-update-timer", 1182010203);
 user_pref("app.update.lastUpdateTime.microsummary-generator-update-timer", 1222586145);
 user_pref("app.update.lastUpdateTime.search-engine-update-timer", 1182010203);
+user_pref("browser.shell.checkDefaultBrowser", false);
 EOF_FF
     > $ff_def/user.js
+
+
+    ff_distr="$1/distribution"
+    mkdir -p "$ff_distr"
+    echo <<EOF_FF
+{
+    "policies": {
+        "DisableAppUpdate": true
+    }
+}
+EOF_FF
+    > $ff_distr/policies.json
 }
 
 function instFF() {
