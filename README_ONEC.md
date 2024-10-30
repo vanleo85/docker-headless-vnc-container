@@ -1,4 +1,15 @@
 
+
+Создание базы 1с с публикацией в apache2
+
+runner init-dev
+mkdir -p /var/www/ib
+chmod -R 777 "/build/ib" "/var/www/ib"
+/opt/1cv8/current/webinst -publish -apache24 -wsdir "ib" -dir "/var/www/ib" -connstr "File=\"/build/ib\";"
+service apache2 restart
+
+
+
 docker build -t vnc-test:latest -f Dockerfile.debian-xfce-vnc .
 
 crm

@@ -16,6 +16,7 @@ user_pref("app.update.lastUpdateTime.blocklist-background-update-timer", 1182010
 user_pref("app.update.lastUpdateTime.microsummary-generator-update-timer", 1222586145);
 user_pref("app.update.lastUpdateTime.search-engine-update-timer", 1182010203);
 user_pref("browser.shell.checkDefaultBrowser", false);
+user_pref("intl.locale.requested", "ru,en-US");
 EOF_FF
     > $ff_def/user.js
 
