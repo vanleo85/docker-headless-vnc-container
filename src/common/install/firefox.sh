@@ -7,7 +7,7 @@ echo "Install Firefox $VERSION"
 function disableUpdate(){
     ff_def="$1/browser/defaults/profile"
     mkdir -p $ff_def
-    echo <<EOF_FF
+    cat << EOF > $ff_def/user.js
 user_pref("app.update.auto", false);
 user_pref("app.update.enabled", false);
 user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1182011519);
@@ -17,8 +17,7 @@ user_pref("app.update.lastUpdateTime.microsummary-generator-update-timer", 12225
 user_pref("app.update.lastUpdateTime.search-engine-update-timer", 1182010203);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("intl.locale.requested", "ru,en-US");
-EOF_FF
-    > $ff_def/user.js
+EOF
 
 
     ff_distr="$1/distribution"
@@ -31,6 +30,19 @@ EOF_FF
     }
 }
 EOF
+
+    ff_pref="$1/defaults/pref"
+    mkdir -p "$ff_pref"
+    cat <<EOF > "${ff_pref}/autoconfig.js"
+pref("general.config.filename", "firefox.cfg");
+pref("general.config.obscure_value", 0);
+EOF
+
+    cat <<EOF > "$1/firefox.cfg"
+// IMPORTANT: Start your code on the 2nd line
+defaultPref("intl.locale.requested", "ru,en-US")
+EOF
+
 
 }
 

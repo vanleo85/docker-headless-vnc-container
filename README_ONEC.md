@@ -11,6 +11,7 @@ service apache2 restart
 
 
 docker build -t vnc-test:latest -f Dockerfile.debian-xfce-vnc .
+docker run -it -p 31001:5901 -p 31002:6901 vnc-test:latest
 
 crm
 8.3.20.2290
