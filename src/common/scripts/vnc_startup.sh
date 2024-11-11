@@ -142,6 +142,10 @@ if [[ -n "${NH_PORT_NUMBER}" ]]; then
     echo "NH_PORT_NUMBER was substituted by new value: ${NH_PORT_NUMBER}"
 fi
 
+mkdir -p /run/dbus
+dbus-daemon --system --fork
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
+
 if [ -z "$1" ] || [[ $1 =~ -w|--wait ]]; then
     wait $PID_SUB
 else
