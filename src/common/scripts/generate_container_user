@@ -30,3 +30,7 @@ if [ x"$USER_ID" != x"0" ]; then
     echo "nss_wrapper location: $LD_PRELOAD"
     export LD_PRELOAD
 fi
+
+if [ x"$USER_ID" == x"0" ]; then
+    umask 0002
+fi
