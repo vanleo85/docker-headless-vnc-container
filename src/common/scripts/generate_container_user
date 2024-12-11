@@ -34,3 +34,5 @@ fi
 if [ x"$USER_ID" == x"0" ]; then
     umask 0002
 fi
+
+export LIBGL_ALWAYS_SOFTWARE=1
