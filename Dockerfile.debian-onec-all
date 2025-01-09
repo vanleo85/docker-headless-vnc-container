@@ -53,8 +53,8 @@ RUN rm downloads/platform83/${ONEC_VERSION}/.gitkeep \
       && /tmp/download-onec-packages.sh $ONEC_USERNAME $ONEC_PASSWORD; \
     fi \
   && rm -rf downloads/platform83/${ONEC_VERSION}/*thin*.tar.gz \
-  && for file in downloads/platform83/${ONEC_VERSION}/*.tar.gz; do [ -f "$file" ] && tar -xzvf "$file"; done \
-  && for file in downloads/platform83/${ONEC_VERSION}/*.zip; do [ -f "$file" ] && unzip "$file"; done \
+  && for file in downloads/platform83/${ONEC_VERSION}/*.tar.gz; do [ -f "$file" ] && tar -xzvf "$file"; done || true \
+  && for file in downloads/platform83/${ONEC_VERSION}/*.zip; do [ -f "$file" ] && unzip "$file"; done || true \
   && rm -rf *thin*.deb \
   && rm /tmp/download-onec-packages.sh
 
