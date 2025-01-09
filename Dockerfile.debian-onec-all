@@ -38,6 +38,12 @@ WORKDIR /tmp
 
 COPY ./src/onec/scripts/download-onec-packages.sh /tmp/download-onec-packages.sh
 
+# + Установка unzip для распаковки новых версий платформы 1С в формате zip
+RUN \
+  apt update \
+  && apt install -qqy unzip
+# - Установка unzip
+
 COPY ./src/onec/dist/ downloads/platform83/${ONEC_VERSION}/
 RUN rm downloads/platform83/${ONEC_VERSION}/.gitkeep \
   && rm -rf downloads/platform83/${ONEC_VERSION}/thin.client*.tar.gz \
@@ -48,6 +54,7 @@ RUN rm downloads/platform83/${ONEC_VERSION}/.gitkeep \
     fi \
   && rm -rf downloads/platform83/${ONEC_VERSION}/*thin*.tar.gz \
   && for file in downloads/platform83/${ONEC_VERSION}/*.tar.gz; do tar -xzvf "$file"; done \
+  && for file in downloads/platform83/${ONEC_VERSION}/*.zip; do unzip "$file"; done \
   && rm -rf *thin*.deb \
   && rm /tmp/download-onec-packages.sh
 
